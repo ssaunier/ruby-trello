@@ -274,8 +274,8 @@ module Helpers
 
   def label_details
     [
-      {'color' => 'yellow', 'name' => 'iOS'},
-      {'color' => 'purple', 'name' => 'Issue or bug'}
+      {'color' => 'yellow', 'name' => 'iOS', 'id' => 'yellow_id'},
+      {'color' => 'purple', 'name' => 'Issue or bug', 'id' => 'purple_id'}
     ]
   end
 
