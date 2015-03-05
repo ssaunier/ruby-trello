@@ -78,11 +78,22 @@ module Trello
     end
 
     context "labels" do
-      it "gets the specific labels for the board" do
+      it "gets the specific label names for the board" do
         client.stub(:get).with("/boards/abcdef123456789123456789/labelnames").
           and_return label_name_payload
 
-        board.labels.count.should eq(6)
+        label_names = board.labels
+        label_names.count.should eq(6)
+        label_names.first.should be_instance_of LabelName
+      end
+
+      it "gets the specific labels for the board" do
+        client.stub(:get).with("/boards/abcdef123456789123456789/labels").
+          and_return label_payload
+
+        labels = board.labels(only_names: false)
+        labels.count.should eq(2)
+        labels.first.should be_instance_of Label
       end
     end
 

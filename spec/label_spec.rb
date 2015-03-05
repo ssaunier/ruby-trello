@@ -21,13 +21,6 @@ module Trello
       end
     end
 
-    context "finding" do
-      it "gets all labels for a given board" do
-        client.should_receive(:get).with("/boards/abcdef123456789123456789/labels").and_return label_payload
-        Label.all_for_board('abcdef123456789123456789')
-      end
-    end
-
     context "updating" do
       it "updates the label name" do
         expected_new_name = "xxx"

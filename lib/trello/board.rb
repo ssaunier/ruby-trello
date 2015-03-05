@@ -106,9 +106,14 @@ module Trello
     # Returns a reference to the organization this board belongs to.
     one :organization, path: :organizations, using: :organization_id
 
-    def labels
-      labels = client.get("/boards/#{id}/labelnames").json_into(LabelName)
-      MultiAssociation.new(self, labels).proxy
+    def labels(options = { only_names: true })
+      if options[:only_names]
+        labels = client.get("/boards/#{id}/labelnames").json_into(LabelName)
+        MultiAssociation.new(self, labels).proxy
+      else
+        labels = client.get("/boards/#{id}/labels").json_into(Label)
+        MultiAssociation.new(self, labels).proxy
+      end
     end
 
     # :nodoc:
